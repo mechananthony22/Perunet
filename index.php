@@ -129,6 +129,54 @@ $router->addRoute('GET', '/usuarios/compra/:id', function($id) {
     return $controller->detalleCompra($id);
 });
 
+$router->addRoute('GET', '/usuarios/tracking/:id', function($id) {
+    AuthMiddleware::checkAuth(); // <-- Proteger esta ruta
+    require_once __DIR__ . '/app/controllers/UsuarioController.php';
+    $controller = new UsuarioController();
+    return $controller->tracking($id);
+});
+
+// ===========================
+// 🛠️ RUTAS BUILDER (PÚBLICO)
+// ===========================
+
+// Builder principal
+$router->addRoute('GET', '/builder', function() {
+    require_once __DIR__ . '/app/controllers/BuilderController.php';
+    require_once __DIR__ . '/app/models/BuilderModel.php';
+    require_once __DIR__ . '/app/models/ProductoModel.php';
+    $controller = new BuilderController();
+    return $controller->index();
+});
+
+// PC Builder
+$router->addRoute('GET', '/builder/pc', function() {
+    require_once __DIR__ . '/app/controllers/BuilderController.php';
+    require_once __DIR__ . '/app/models/BuilderModel.php';
+    require_once __DIR__ . '/app/models/ProductoModel.php';
+    $controller = new BuilderController();
+    return $controller->pc();
+});
+
+// Setup Builder
+$router->addRoute('GET', '/builder/setup', function() {
+    require_once __DIR__ . '/app/controllers/BuilderController.php';
+    require_once __DIR__ . '/app/models/BuilderModel.php';
+    require_once __DIR__ . '/app/models/ProductoModel.php';
+    $controller = new BuilderController();
+    return $controller->setup();
+});
+
+// Agregar configuración al carrito
+$router->addRoute('POST', '/builder/add-to-cart', function() {
+    require_once __DIR__ . '/app/controllers/BuilderController.php';
+    require_once __DIR__ . '/app/models/BuilderModel.php';
+    require_once __DIR__ . '/app/models/ProductoModel.php';
+    require_once __DIR__ . '/app/models/DetalleCarrito.php';
+    $controller = new BuilderController();
+    return $controller->addToCart();
+});
+
 // ===========================
 // 🛠️ RUTAS DASHBOARD (ADMIN)
 // ===========================

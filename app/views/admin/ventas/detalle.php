@@ -31,6 +31,7 @@ include __DIR__ . '/../../../components/adminHead.php';
                         <input type="hidden" name="venta_id" value="<?= htmlspecialchars($venta['id']) ?>">
                         <select name="estado" class="border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-red-500">
                             <option value="pendiente" <?= ($venta['estado'] ?? '') === 'pendiente' ? 'selected' : '' ?>>Pendiente</option>
+                            <option value="preparando" <?= ($venta['estado'] ?? '') === 'preparando' ? 'selected' : '' ?>>Preparando</option>
                             <option value="enviado" <?= ($venta['estado'] ?? '') === 'enviado' ? 'selected' : '' ?>>Enviado</option>
                             <option value="entregado" <?= ($venta['estado'] ?? '') === 'entregado' ? 'selected' : '' ?>>Entregado</option>
                             <option value="cancelado" <?= ($venta['estado'] ?? '') === 'cancelado' ? 'selected' : '' ?>>Cancelado</option>

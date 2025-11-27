@@ -15,7 +15,6 @@ ob_start();
             <button type="button" id="editarPerfil" class="mt-4 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-6 rounded-lg transition">Editar perfil</button>
         </div>
         <!-- Fin tarjeta de perfil -->
-        <!-- Eliminar la tarjeta/formulario de la derecha -->
     </div>
     <div class="w-full max-w-4xl bg-white rounded-xl shadow-lg p-8 mb-8">
         <h2 class="text-2xl font-bold text-black mb-6 flex items-center gap-2">
@@ -61,7 +60,7 @@ ob_start();
                             <td class="py-2 px-4 flex gap-2">
                                 <?php if (!empty($compra['id_ven'])): ?>
                                     <a href="/perunet/usuarios/compra/<?= $compra['id_ven'] ?>" class="text-blue-600 hover:underline font-semibold">Ver Detalle</a>
-                                    <button type="button" class="text-sm bg-blue-100 hover:bg-blue-200 text-blue-800 font-semibold px-3 py-1 rounded transition" onclick="verEstado('<?= ucfirst($compra['estado']) ?>')">Ver Estado</button>
+                                    <a href="/perunet/usuarios/tracking/<?= $compra['id_ven'] ?>" class="text-sm bg-blue-100 hover:bg-blue-200 text-blue-800 font-semibold px-3 py-1 rounded transition">Ver Seguimiento</a>
                                 <?php endif; ?>
                             </td>
                         </tr>
@@ -204,18 +203,4 @@ new Chart(ctx, {
         }
     }
 });
-
-// Ver estado de la compra
-function verEstado(estado) {
-    let mensaje = '';
-    switch(estado.toLowerCase()) {
-        case 'pendiente': mensaje = 'Tu pedido está pendiente de confirmación.'; break;
-        case 'preparando': mensaje = 'Estamos preparando tu pedido.'; break;
-        case 'enviado': mensaje = 'Tu pedido ha sido enviado.'; break;
-        case 'entregado': mensaje = 'Tu pedido ha sido entregado.'; break;
-        case 'cancelado': mensaje = 'Tu pedido fue cancelado.'; break;
-        default: mensaje = 'Estado desconocido.';
-    }
-    Swal.fire({icon: 'info', title: 'Estado de la compra', html: `<b>${estado}</b><br>${mensaje}`});
-}
-</script> 
+</script>

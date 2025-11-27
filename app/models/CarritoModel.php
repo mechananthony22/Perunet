@@ -140,4 +140,31 @@ class CarritoModel extends Model
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result ? (int)$result['count'] : 0;
     }
+
+    /**
+     * Obtener o crear carrito activo del usuario
+     */
+    public function getOrCreateCart($id_usuario)
+    {
+        try {
+            // Buscar carrito activo existente
+            $carrito = $this->getByCartValidationCliente($id_usuario);
+            
+            if ($carrito) {
+                return $carrito;
+            }
+            
+            // Si no existe, crear uno nuevo
+            $id_carrito = $this->create($id_usuario);
+            
+            if ($id_carrito) {
+                return $this->getById($id_carrito);
+            }
+            
+            throw new Exception("No se pudo crear el carrito");
+            
+        } catch (Exception $e) {
+            throw new Exception("Error al obtener o crear carrito: " . $e->getMessage());
+        }
+    }
 }

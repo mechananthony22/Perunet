@@ -214,4 +214,37 @@ class DetalleCarrito extends Model
             throw new Exception("Error al verificar si el carrito esta vacio: " . $e->getMessage());
         }
     }
+
+    /**
+     * Agregar producto al carrito (usado por el builder)
+     */
+    public function agregarProducto($id_usuario, $id_producto, $cantidad = 1)
+    {
+        try {
+            // Obtener o crear carrito del usuario
+            require_once __DIR__ . '/CarritoModel.php';
+            $carritoModel = new CarritoModel();
+            $carrito = $carritoModel->getOrCreateCart($id_usuario);
+            
+            if (!$carrito) {
+                throw new Exception("No se pudo crear el carrito");
+            }
+            
+            // Obtener precio del producto
+            $sqlPrecio = "SELECT precio FROM producto WHERE id_pro = ?";
+            $stmtPrecio = $this->db->prepare($sqlPrecio);
+            $stmtPrecio->execute([$id_producto]);
+            $precio = $stmtPrecio->fetchColumn();
+            
+            if (!$precio) {
+                throw new Exception("Producto no encontrado");
+            }
+            
+            // Usar el método createDetalle existente
+            return $this->createDetalle($carrito['id_carrito'], $id_producto, $cantidad, $precio);
+            
+        } catch (Exception $e) {
+            throw new Exception("Error al agregar producto: " . $e->getMessage());
+        }
+    }
 }

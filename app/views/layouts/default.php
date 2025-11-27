@@ -41,6 +41,9 @@
     <!-- Atención al cliente flotante -->
     <?php include __DIR__ . '/../../components/helpSection.php'; ?>
 
+    <!-- Botón flotante Configurador -->
+    <?php include __DIR__ . '/../../components/builder_button.php'; ?>
+
     <!-- Scripts globales aquí -->
     <?php if (isset($extraScripts)) echo $extraScripts; ?>
     <?php if (isset($_SESSION['usuario']['id_us'])): ?>

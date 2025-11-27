@@ -21,6 +21,7 @@
                 <li class="hover:bg-blue-100 px-2 rounded transition"><a href="/perunet/admin/config/subcategorias" class="text-gray-700">SubCategorias</a></li>
             </ul>
         </li>
+        <li class="px-6 py-2 hover:bg-blue-100 rounded-l-lg transition w-full"><a href="/perunet/admin/ventas" class="text-gray-700 font-medium">Pedidos</a></li>
     </ul>
     <a class="w-full pl-6 py-2 mb-4 rounded-l-full hover:bg-blue-100 transition text-gray-500 flex items-center gap-2" href="/perunet/">
         <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1188 1000">
