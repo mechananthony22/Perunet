@@ -38,11 +38,14 @@
     <!-- Footer global -->
     <?php include __DIR__ . '/../../components/footer.php'; ?>
 
-    <!-- Atención al cliente flotante -->
-    <?php include __DIR__ . '/../../components/helpSection.php'; ?>
+    <!-- Atención al cliente flotante (DESHABILITADO) -->
+    <?php // include __DIR__ . '/../../components/helpSection.php'; ?>
 
     <!-- Botón flotante Configurador -->
     <?php include __DIR__ . '/../../components/builder_button.php'; ?>
+
+    <!-- Chatbot Widget -->
+    <?php include __DIR__ . '/../../components/chatbot.php'; ?>
 
     <!-- Scripts globales aquí -->
     <?php if (isset($extraScripts)) echo $extraScripts; ?>

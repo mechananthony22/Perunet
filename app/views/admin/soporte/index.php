@@ -1,11 +1,11 @@
 <?php
 $title = "Gestión de Soporte Técnico - Admin";
-include __DIR__ . '/../../components/adminHead.php';
+include __DIR__ . '/../../../components/adminHead.php';
 ?>
 
 <body class="bg-gray-50 min-h-screen">
-    <?php include __DIR__ . '/../../components/adminNavBar.php'; ?>
-    <?php include __DIR__ . '/../../components/adminMenuNav.php'; ?>
+    <?php include __DIR__ . '/../../../components/adminNavBar.php'; ?>
+    <?php include __DIR__ . '/../../../components/adminMenuNav.php'; ?>
 
     <main class="p-4 md:ml-64">
         <!-- Header -->

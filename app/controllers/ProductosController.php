@@ -16,6 +16,42 @@ class ProductosController extends Controller
         $this->subcategoriasModel = new SubcategoriasModel();
     }
 
+    public function busqueda()
+    {
+        // Obtener término de búsqueda
+        $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
+        
+        // Obtener filtros de la URL
+        $marcas = isset($_GET['marca']) ? (array)$_GET['marca'] : [];
+        $precioMin = isset($_GET['precio_min']) ? (float)$_GET['precio_min'] : null;
+        $precioMax = isset($_GET['precio_max']) ? (float)$_GET['precio_max'] : null;
+
+        // Si no hay búsqueda, redirigir al inicio
+        if (empty($busqueda)) {
+            $this->redirect('/');
+            return;
+        }
+
+        // Buscar productos
+        $productos = $this->productoModel->buscar($busqueda, $marcas, $precioMin, $precioMax);
+        
+        // Obtener todas las categorías para el filtro
+        $categorias = $this->categoriasModel->getAll();
+        
+        // Obtener estadísticas del carrito
+        $cartCount = cartCount();
+        
+        $this->renderWithLayout('productos/busqueda', [
+            'title' => 'Búsqueda: ' . htmlspecialchars($busqueda) . ' - PeruNet',
+            'description' => 'Resultados de búsqueda para: ' . htmlspecialchars($busqueda),
+            'productos' => $productos,
+            'busqueda' => $busqueda,
+            'categorias' => $categorias,
+            'cartCount' => $cartCount,
+            'session' => $this->session
+        ]);
+    }
+
     public function indexCategoria($categoria)
     {
         // Obtener filtros de la URL

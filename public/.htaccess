@@ -1,0 +1,3 @@
+# Test if images can be accessed directly
+DirectoryIndex disabled
+Options -Indexes

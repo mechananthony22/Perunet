@@ -5,7 +5,13 @@ $title = "Perunet | " . htmlspecialchars($producto['nombre']);
 <div class="max-w-5xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-2 gap-10 bg-white rounded-xl shadow-lg mt-10">
     <!-- Imagen del producto -->
     <div class="flex flex-col items-center justify-center">
-        <img src="/perunet/public/img/<?= htmlspecialchars($producto['imagen'] ?? 'EMPRESA/p.png') ?>"
+        <?php
+        $imagePath = $producto['imagen'] ?? 'EMPRESA/p.png';
+        $pathParts = explode('/', $imagePath);
+        $pathParts[count($pathParts) - 1] = rawurlencode($pathParts[count($pathParts) - 1]);
+        $encodedPath = implode('/', $pathParts);
+        ?>
+        <img src="/perunet/public/img/<?= $encodedPath ?>"
             alt="<?= htmlspecialchars($producto['nombre']) ?>"
             class="w-80 h-80 object-contain rounded-lg shadow mb-4">
     </div>

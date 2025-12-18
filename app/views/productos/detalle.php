@@ -13,7 +13,13 @@ $style = "producto-detalle";
     <div class="producto-container">
         <div class="producto-imagen">
             <!-- Product Images -->
-            <img src="/perunet/public/img/<?= htmlspecialchars($producto['imagen'] ?? 'EMPRESA/p.png') ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>" class="img-producto">
+            <?php
+            $imagePath = $producto['imagen'] ?? 'EMPRESA/p.png';
+            $pathParts = explode('/', $imagePath);
+            $pathParts[count($pathParts) - 1] = rawurlencode($pathParts[count($pathParts) - 1]);
+            $encodedPath = implode('/', $pathParts);
+            ?>
+            <img src="/perunet/public/img/<?= $encodedPath ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>" class="img-producto">
         </div>
 
         <!-- descripcion corta -->

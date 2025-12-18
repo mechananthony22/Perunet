@@ -58,8 +58,8 @@ include_once __DIR__ . '../../models/DetalleCarrito.php';
                         <a href="/perunet/usuario/perfil" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                             <i class="fa fa-user mr-2"></i>Ver perfil
                         </a>
-                        <a href="/perunet/soporte" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
-                            <i class="fa fa-tools mr-2"></i>Soporte Técnico
+                        <a href="/perunet/builder" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                            <i class="fa fa-cogs mr-2"></i>Catálogo de Servicios
                         </a>
                         <a href="/perunet/logout" class="block px-4 py-2 text-red-600 hover:bg-red-50">Cerrar sesión</a>
                     <?php else: ?>

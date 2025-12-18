@@ -32,8 +32,10 @@ class BuilderController
         if ($currentStep > 0 && $currentStep <= count($categories)) {
             $currentCategory = $categories[$currentStep - 1];
             $products = $this->model->getProductsByBuilderCategory($currentCategory['id_cat']);
+            $subcategories = $this->model->getSubcategoriesByBuilderCategory($currentCategory['id_cat']);
         } else {
             $products = [];
+            $subcategories = [];
         }
 
         require_once __DIR__ . '/../views/builder/pc_builder.php';
@@ -52,8 +54,10 @@ class BuilderController
         if ($currentStep > 0 && $currentStep <= count($categories)) {
             $currentCategory = $categories[$currentStep - 1];
             $products = $this->model->getProductsByBuilderCategory($currentCategory['id_cat']);
+            $subcategories = $this->model->getSubcategoriesByBuilderCategory($currentCategory['id_cat']);
         } else {
             $products = [];
+            $subcategories = [];
         }
 
         require_once __DIR__ . '/../views/builder/setup_builder.php';

@@ -10,6 +10,10 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
+    # Allow direct access to files in public directory
+    RewriteCond %{REQUEST_URI} ^/perunet/public/
+    RewriteRule ^perunet/public/(.*)$ public/$1 [L]
+
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f

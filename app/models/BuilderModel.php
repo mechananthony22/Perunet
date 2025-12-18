@@ -21,16 +21,38 @@ class BuilderModel extends Model
     /**
      * Obtener productos por categoría de builder
      */
+    /**
+     * Obtener productos por categoría de builder
+     */
     public function getProductsByBuilderCategory($categoryId)
     {
-        $sql = "SELECT p.*, m.nombre AS marca_nombre, mo.nombre AS modelo_nombre
+        $sql = "SELECT p.*, m.nombre AS marca_nombre, mo.nombre AS modelo_nombre, 
+                       s.nombre AS subcategoria_nombre, s.id AS subcategoria_id
                 FROM producto p
                 INNER JOIN builder_product_category bpc ON p.id_pro = bpc.id_producto
                 LEFT JOIN marca m ON p.id_marca = m.id_mar
                 LEFT JOIN modelo mo ON p.id_modelo = mo.id_mod
+                LEFT JOIN subcategoria s ON p.id_subcategoria = s.id
                 WHERE bpc.id_builder_category = :categoryId
                 AND p.stock > 0
                 ORDER BY p.precio ASC";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['categoryId' => $categoryId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Obtener subcategorías disponibles para una categoría de builder
+     */
+    public function getSubcategoriesByBuilderCategory($categoryId)
+    {
+        $sql = "SELECT DISTINCT s.id, s.nombre
+                FROM subcategoria s
+                INNER JOIN producto p ON s.id = p.id_subcategoria
+                INNER JOIN builder_product_category bpc ON p.id_pro = bpc.id_producto
+                WHERE bpc.id_builder_category = :categoryId
+                AND p.stock > 0
+                ORDER BY s.nombre ASC";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['categoryId' => $categoryId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

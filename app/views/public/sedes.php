@@ -28,27 +28,10 @@ ob_start();
         </div>
     </div>
 </div>
-<!-- Chatbot y scripts específicos -->
+<!-- Scripts específicos de sedes -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<link rel="stylesheet" href="/perunet/public/css/chatbot.css">
-<div id="chatbot-container">
-    <div id="chatbot-header">
-        <h3>Chatbot de Ayuda</h3>
-        <button id="close-chatbot-btn">&times;</button>
-    </div>
-    <div id="chatbot-body">
-        <div class="chatbot-message">
-            <p>Bienvenido al chatbot de PeruNet. ¿En qué puedo ayudarte?</p>
-        </div>
-    </div>
-    <div id="chatbot-input">
-        <input type="text" id="user-input" placeholder="Escribe tu mensaje...">
-        <button id="send-btn">Enviar</button>
-    </div>
-</div>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="/perunet/public/js/sedes.js"></script>
-<script src="/perunet/public/js/chatbot.js"></script>
 <script src="/perunet/public/js/funciones.js" defer></script>
 <?php
 $content = ob_get_clean();

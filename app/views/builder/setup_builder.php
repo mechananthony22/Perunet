@@ -67,16 +67,40 @@ $selectedProducts = isset($_SESSION['builder_setup']) ? $_SESSION['builder_setup
             <?php endif; ?>
         </div>
 
+        <!-- Subcategory Filters -->
+        <?php if (!empty($subcategories)): ?>
+            <div class="flex flex-wrap gap-4 mb-8 justify-center">
+                <button class="filter-btn active bg-red-600 text-white px-6 py-2 rounded-full font-bold transition shadow-md hover:bg-red-700" data-filter="all">
+                    Todos
+                </button>
+                <?php foreach ($subcategories as $sub): ?>
+                    <button class="filter-btn bg-white text-gray-700 border border-gray-300 px-6 py-2 rounded-full font-bold transition shadow-sm hover:bg-gray-100 hover:text-red-600" data-filter="<?= $sub['id'] ?>">
+                        <?= $sub['nombre'] ?>
+                    </button>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
         <!-- Products Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8" id="products-grid">
             <?php if (!empty($products)): ?>
                 <?php foreach ($products as $product): ?>
-                    <div class="bg-white border-2 border-gray-200 rounded-xl overflow-hidden hover:shadow-xl hover:border-red-400 transition-all duration-300 product-card" data-product-id="<?= $product['id_pro'] ?>" data-product-name="<?= htmlspecialchars($product['nombre']) ?>" data-product-price="<?= $product['precio'] ?>" data-product-image="<?= htmlspecialchars($product['imagen']) ?>">
+                    <div class="bg-white border-2 border-gray-200 rounded-xl overflow-hidden hover:shadow-xl hover:border-red-400 transition-all duration-300 product-card" 
+                         data-product-id="<?= $product['id_pro'] ?>" 
+                         data-product-name="<?= htmlspecialchars($product['nombre']) ?>" 
+                         data-product-price="<?= $product['precio'] ?>" 
+                         data-product-image="<?= htmlspecialchars($product['imagen']) ?>"
+                         data-subcategory-id="<?= $product['subcategoria_id'] ?? '' ?>">
                         <div class="relative">
                             <img src="/perunet/public/assets/img/<?= $product['imagen'] ?>" alt="<?= htmlspecialchars($product['nombre']) ?>" class="w-full h-48 object-cover">
                             <div class="absolute top-2 right-2 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold">
                                 S/ <?= number_format($product['precio'], 2) ?>
                             </div>
+                            <?php if (!empty($product['subcategoria_nombre'])): ?>
+                                <div class="absolute top-2 left-2 bg-gray-900 bg-opacity-75 text-white px-2 py-0.5 rounded text-xs">
+                                    <?= htmlspecialchars($product['subcategoria_nombre']) ?>
+                                </div>
+                            <?php endif; ?>
                         </div>
                         <div class="p-4">
                             <h3 class="text-gray-900 font-bold text-lg mb-2 line-clamp-2"><?= htmlspecialchars($product['nombre']) ?></h3>
@@ -97,6 +121,35 @@ $selectedProducts = isset($_SESSION['builder_setup']) ? $_SESSION['builder_setup
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Update active button state
+            filterBtns.forEach(b => {
+                b.classList.remove('bg-red-600', 'text-white');
+                b.classList.add('bg-white', 'text-gray-700');
+            });
+            this.classList.remove('bg-white', 'text-gray-700');
+            this.classList.add('bg-red-600', 'text-white');
+
+            const filterValue = this.getAttribute('data-filter');
+
+            productCards.forEach(card => {
+                if (filterValue === 'all' || card.getAttribute('data-subcategory-id') == filterValue) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
 
 <!-- Floating Summary Panel -->
 <div id="builder-summary" class="fixed bottom-4 right-4 bg-gray-900 border-2 border-red-500 rounded-xl shadow-2xl p-6 w-96 max-h-[80vh] overflow-y-auto z-50">

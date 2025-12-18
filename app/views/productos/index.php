@@ -84,7 +84,14 @@ $style = "productos";
             <?php foreach ($productos as $producto) : ?>
                 <div class="bg-white rounded-xl shadow p-4 flex flex-col items-center">
                     <div class="w-full flex justify-center mb-4">
-                        <img src="/perunet/public/img/<?= htmlspecialchars($producto['imagen'] ?? 'EMPRESA/p.png') ?>"
+                        <?php
+                        $imagePath = $producto['imagen'] ?? 'EMPRESA/p.png';
+                        // Encode only the filename, not the directory path
+                        $pathParts = explode('/', $imagePath);
+                        $pathParts[count($pathParts) - 1] = rawurlencode($pathParts[count($pathParts) - 1]);
+                        $encodedPath = implode('/', $pathParts);
+                        ?>
+                        <img src="/perunet/public/img/<?= $encodedPath ?>"
                             alt="<?= htmlspecialchars($producto['nombre']) ?>"
                             class="w-28 h-28 object-contain rounded">
                     </div>

@@ -42,9 +42,20 @@ $router->addRoute('GET', '/carrito', function() {
     return $controller->index();
 });
 
+// Pagos y Facturación
+$router->addRoute('GET', '/pagos-facturacion', function() {
+    include __DIR__ . '/app/views/public/pagos-facturacion.php';
+});
+
 // ===========================
 // 📦 RUTAS DE PRODUCTOS (PÚBLICO)
 // ===========================
+
+// Búsqueda de productos (debe ir ANTES de las rutas con parámetros)
+$router->addRoute('GET', '/productos', function() {
+    $controller = new ProductosController();
+    return $controller->busqueda();
+});
 
 // Lista de productos por categoría
 $router->addRoute('GET', '/productos/:categoria', function($categoria) {
@@ -115,6 +126,15 @@ $router->addRoute('GET', '/logout', function() {
     return $controller->logout();
 });
 
+// Perfil de usuario (ruta corta)
+$router->addRoute('GET', '/perfil', function() {
+    AuthMiddleware::checkAuth(); // <-- Proteger esta ruta
+    require_once __DIR__ . '/app/controllers/UsuarioController.php';
+    $controller = new UsuarioController();
+    return $controller->perfil();
+});
+
+// Perfil de usuario (ruta larga - mantener compatibilidad)
 $router->addRoute('GET', '/usuario/perfil', function() {
     AuthMiddleware::checkAuth(); // <-- Proteger esta ruta
     require_once __DIR__ . '/app/controllers/UsuarioController.php';

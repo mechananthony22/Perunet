@@ -295,6 +295,56 @@ class ProductoModel extends Model
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Buscar productos por término de búsqueda con filtros
+     */
+    public function buscar($busqueda, $marcas = [], $precioMin = null, $precioMax = null)
+    {
+        $sql = "SELECT p.*, c.nombre AS categoria, s.nombre AS subcategoria, m.nombre AS marca
+                FROM producto p
+                JOIN subcategoria s ON p.id_subcategoria = s.id
+                JOIN categoria c ON s.id_categoria = c.id_cat
+                JOIN marca m ON p.id_marca = m.id_mar
+                WHERE (p.nombre LIKE :busqueda1 OR p.descripcion LIKE :busqueda2)";
+
+        $params = [
+            ':busqueda1' => '%' . $busqueda . '%',
+            ':busqueda2' => '%' . $busqueda . '%'
+        ];
+
+        if (!empty($marcas)) {
+            $marcas_placeholders = [];
+            foreach ($marcas as $key => $marca) {
+                $placeholder = ":marca" . $key;
+                $marcas_placeholders[] = $placeholder;
+                $params[$placeholder] = $marca;
+            }
+            $sql .= " AND m.nombre IN (" . implode(',', $marcas_placeholders) . ")";
+        }
+
+        if ($precioMin !== null) {
+            $sql .= " AND p.precio >= :precio_min";
+            $params[':precio_min'] = $precioMin;
+        }
+
+        if ($precioMax !== null) {
+            $sql .= " AND p.precio <= :precio_max";
+            $params[':precio_max'] = $precioMax;
+        }
+
+        $sql .= " ORDER BY p.fecha_creacion DESC";
+
+        $stmt = $this->db->prepare($sql);
+        
+        foreach ($params as $key => &$val) {
+            $stmt->bindParam($key, $val);
+        }
+        
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
     // Crear nuevo producto
     public function create($data)

@@ -118,8 +118,11 @@ class ProductosController
             $id = $_POST['id'];
             $nombreImagen = $_POST['imagen_actual'] ?? null;
 
-            // subir la imagen
-            $nombreImagen = $this->subirImagen() ?? null;
+            // subir la imagen solo si se seleccionó un archivo nuevo
+            $nuevaImagen = $this->subirImagen();
+            if ($nuevaImagen !== null) {
+                $nombreImagen = $nuevaImagen;
+            }
 
             $data = [
                 'nombre'          => $_POST['nombre'],
@@ -150,11 +153,29 @@ class ProductosController
     {
         if (isset($_FILES['imagen_file']) && $_FILES['imagen_file']['error'] === UPLOAD_ERR_OK) {
             $nombreTemporal = $_FILES['imagen_file']['tmp_name'];
-            $nombreArchivo = basename($_FILES['imagen_file']['name']);
+            $nombreOriginal = basename($_FILES['imagen_file']['name']);
+            
+            // Obtener la extensión del archivo
+            $extension = strtolower(pathinfo($nombreOriginal, PATHINFO_EXTENSION));
+            
+            // Generar un nombre seguro sin caracteres especiales
+            $nombreBase = pathinfo($nombreOriginal, PATHINFO_FILENAME);
+            
+            // Remover acentos y caracteres especiales
+            $nombreBase = iconv('UTF-8', 'ASCII//TRANSLIT', $nombreBase);
+            // Reemplazar espacios y caracteres no alfanuméricos con guiones bajos
+            $nombreBase = preg_replace('/[^a-zA-Z0-9_-]/', '_', $nombreBase);
+            // Eliminar guiones bajos múltiples
+            $nombreBase = preg_replace('/_+/', '_', $nombreBase);
+            // Limitar longitud
+            $nombreBase = substr($nombreBase, 0, 50);
+            
+            // Agregar timestamp para evitar duplicados
+            $nombreArchivo = $nombreBase . '_' . time() . '.' . $extension;
             
             // ruta relativa a la carpeta uploads
             $carpetaRelativa = '/public/img/uploads/';
-            $carpetaAbsoluta = __DIR__ . '/../..' . $carpetaRelativa;
+            $carpetaAbsoluta = __DIR__ . '/../../..' . $carpetaRelativa;
             
             // crear la carpeta uploads si no existe
             if (!is_dir($carpetaAbsoluta)) {
