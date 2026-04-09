@@ -78,15 +78,16 @@ class VentaModel extends Model
         }
     }
 
-    public function guardarPago($idVenta, $numero_tarjeta, $numero_telefono)
+    public function guardarPago($idVenta, $numero_tarjeta, $numero_telefono, $idTransaccion = null)
     {
         try {
-            $sql = "INSERT INTO pago (id_venta, numero_tarjeta, numero_telefono) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO pago (id_venta, numero_tarjeta, numero_telefono, id_transaccion) VALUES (?, ?, ?, ?)";
             $stmt = $this->db->prepare($sql);
             return $stmt->execute([
                 $idVenta,
                 $numero_tarjeta ?? null,
-                $numero_telefono ?? null
+                $numero_telefono ?? null,
+                $idTransaccion ?? null
             ]);
         } catch (Exception $e) {
             throw new Exception('Error al guardar pago: ' . $e->getMessage());

@@ -5,27 +5,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($title ?? 'PeruNet - Tecnología a tu alcance') ?></title>
+    <title><?= htmlspecialchars($title ?? 'NewTec - Tecnología a tu alcance') ?></title>
 
     <!-- Meta tags -->
-    <meta name="description" content="<?= htmlspecialchars($description ?? 'PeruNet - Tu tienda de confianza para tecnología y computación. Productos de calidad con garantía y soporte técnico.') ?>">
+    <meta name="description" content="<?= htmlspecialchars($description ?? 'NewTec - Tu tienda de confianza para tecnología y computación. Productos de calidad con garantía y soporte técnico.') ?>">
     <meta name="keywords" content="<?= htmlspecialchars($keywords ?? 'tecnología, computadoras, periféricos, gaming, cámaras de seguridad, Perú, Chiclayo') ?>">
-    <meta name="author" content="PeruNet">
+    <meta name="author" content="NewTec">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="<?= htmlspecialchars($ogUrl ?? 'https://perunet.pe') ?>">
-    <meta property="og:title" content="<?= htmlspecialchars($title ?? 'PeruNet - Tecnología a tu alcance') ?>">
+    <meta property="og:title" content="<?= htmlspecialchars($title ?? 'NewTec - Tecnología a tu alcance') ?>">
     <meta property="og:description" content="<?= htmlspecialchars($description ?? 'Tu tienda de confianza para tecnología y computación') ?>">
-    <meta property="og:image" content="<?= htmlspecialchars($ogImage ?? '/perunet/public/img/EMPRESA/PERUNET.png') ?>">
+    <meta property="og:image" content="<?= htmlspecialchars($ogImage ?? '/perunet/public/img/EMPRESA/newtec_logo.png') ?>">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="<?= htmlspecialchars($ogUrl ?? 'https://perunet.pe') ?>">
-    <meta property="twitter:title" content="<?= htmlspecialchars($title ?? 'PeruNet - Tecnología a tu alcance') ?>">
+    <meta property="twitter:title" content="<?= htmlspecialchars($title ?? 'NewTec - Tecnología a tu alcance') ?>">
     <meta property="twitter:description" content="<?= htmlspecialchars($description ?? 'Tu tienda de confianza para tecnología y computación') ?>">
-    <meta property="twitter:image" content="<?= htmlspecialchars($ogImage ?? '/perunet/public/img/EMPRESA/PERUNET.png') ?>">
+    <meta property="twitter:image" content="<?= htmlspecialchars($ogImage ?? '/perunet/public/img/EMPRESA/newtec_logo.png') ?>">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/perunet/public/img/EMPRESA/p.png">

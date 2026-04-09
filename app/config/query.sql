@@ -1,9 +1,9 @@
-DROP DATABASE IF EXISTS perunet;
+DROP DATABASE IF EXISTS tienda_online;
 
-CREATE DATABASE IF NOT EXISTS perunet;
+CREATE DATABASE IF NOT EXISTS tienda_online;
 
 -- Usar la base de datos
-USE perunet;
+USE tienda_online;
 -- 1. Roles -- nueva tabla para mas dinamismo
 -- (rol: admin, cliente, trabajador, proveedor, vendedor)
 CREATE TABLE rol (
@@ -90,7 +90,7 @@ CREATE TABLE producto (
 CREATE TABLE metodo_pago (
   id_met INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(50) NOT NULL,
-  tipo ENUM('tarjeta', 'transferencia', 'monedero') NOT NULL
+  tipo ENUM('tarjeta', 'transferencia', 'monedero', 'entrega') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -146,8 +146,10 @@ CREATE TABLE pago (
   id_venta INT,
   numero_tarjeta VARCHAR(20),
   numero_telefono VARCHAR(15),
+  id_transaccion VARCHAR(100),
   FOREIGN KEY (id_venta) REFERENCES venta(id_ven)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- 15. PROVEEDOR
 CREATE TABLE proveedor (
@@ -338,9 +340,11 @@ VALUES
 ('Controlador de Acceso 2 Puertas', 'Módulo de control para 2 puertas', 180.00, 25, 'CONTROL DE ACCESO/MODULO/Controlador de Acceso 2 Puertas.png', 4, 1, 1); 
 
 -- METODOS DE PAGO
-INSERT INTO metodo_pago (id_met, nombre, tipo) VALUES (1, 'Tarjeta', 'tarjeta');
-INSERT INTO metodo_pago (id_met, nombre, tipo) VALUES (2, 'Yape', 'monedero');
-INSERT INTO metodo_pago (id_met, nombre, tipo) VALUES (3, 'Plin', 'monedero');
+INSERT INTO metodo_pago (id_met, nombre, tipo) VALUES (1, 'TARJETA', 'tarjeta');
+INSERT INTO metodo_pago (id_met, nombre, tipo) VALUES (2, 'YAPE', 'monedero');
+INSERT INTO metodo_pago (id_met, nombre, tipo) VALUES (3, 'PLIN', 'monedero');
+INSERT INTO metodo_pago (id_met, nombre, tipo) VALUES (4, 'TRANSFERENCIA', 'transferencia');
+INSERT INTO metodo_pago (id_met, nombre, tipo) VALUES (5, 'ENTREGA', 'entrega');
 
 
 -- SUCURSAL

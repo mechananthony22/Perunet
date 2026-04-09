@@ -4,44 +4,65 @@ $title = "Inicio - PeruNet";
 $idGamer = null;
 $idVideo = null;
 $idCableado = null;
-if (isset(
+if (
+    isset(
     $categorias
-) && is_array($categorias)) {
+) && is_array($categorias)
+) {
     foreach ($categorias as $cat) {
         $nombre = strtolower(trim($cat['nombre']));
-        if (strpos($nombre, 'gamer') !== false) $idGamer = $cat['id_cat'];
-        if (strpos($nombre, 'videovigilancia') !== false) $idVideo = $cat['id_cat'];
-        if (strpos($nombre, 'cableado') !== false) $idCableado = $cat['id_cat'];
+        if (strpos($nombre, 'gamer') !== false)
+            $idGamer = $cat['id_cat'];
+        if (strpos($nombre, 'videovigilancia') !== false)
+            $idVideo = $cat['id_cat'];
+        if (strpos($nombre, 'cableado') !== false)
+            $idCableado = $cat['id_cat'];
     }
 }
 ?>
 <!-- Banner Principal (Slider) Hero -->
-<div id="banner-slider" class="relative w-screen min-h-[80vh] max-h-[100vh] mx-auto mt-0 rounded-none overflow-hidden shadow-2xl border-b border-gray-200 flex items-center justify-center">
+<div id="banner-slider"
+    class="relative w-screen min-h-[80vh] max-h-[100vh] mx-auto mt-0 rounded-none overflow-hidden shadow-2xl border-b border-gray-200 flex items-center justify-center">
     <!-- Mensaje centrado sobre el banner -->
     <div class="absolute z-20 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
         <div class="bg-black/50 px-8 py-6 rounded-lg shadow-xl">
-            <h1 class="text-4xl md:text-6xl font-bold text-white text-center drop-shadow-lg">Bienvenido a PeruNet<br><span class="text-lg md:text-2xl font-light">Tecnología y Soluciones</span></h1>
+            <h1 class="text-4xl md:text-6xl font-bold text-white text-center drop-shadow-lg">Bienvenido a
+                NewTec<br><span class="text-lg md:text-2xl font-light">Tecnología y Soluciones</span></h1>
         </div>
     </div>
     <div class="slider-wrapper w-full h-full">
-        <img src="/Perunet/public/img/EMPRESA/Banner1.jpg" class="slider-img w-full h-[80vh] max-h-[100vh] object-cover object-center hidden transition-all duration-700" alt="Banner 1">
-        <img src="/Perunet/public/img/EMPRESA/Banner2.jpg" class="slider-img w-full h-[80vh] max-h-[100vh] object-cover object-center hidden transition-all duration-700" alt="Banner 2">
-        <img src="/Perunet/public/img/EMPRESA/Banner3.jpg" class="slider-img w-full h-[80vh] max-h-[100vh] object-cover object-center hidden transition-all duration-700" alt="Banner 3">
-        <img src="/Perunet/public/img/EMPRESA/BannerPromocional.jpg" class="slider-img w-full h-[80vh] max-h-[100vh] object-cover object-center hidden transition-all duration-700" alt="Banner Promocional">
+        <img src="/Perunet/public/img/EMPRESA/Banner1.jpg"
+            class="slider-img w-full h-[80vh] max-h-[100vh] object-cover object-center hidden transition-all duration-700"
+            alt="Banner 1">
+        <img src="/Perunet/public/img/EMPRESA/Banner2.jpg"
+            class="slider-img w-full h-[80vh] max-h-[100vh] object-cover object-center hidden transition-all duration-700"
+            alt="Banner 2">
+        <img src="/Perunet/public/img/EMPRESA/Banner3.jpg"
+            class="slider-img w-full h-[80vh] max-h-[100vh] object-cover object-center hidden transition-all duration-700"
+            alt="Banner 3">
+        <img src="/Perunet/public/img/EMPRESA/BannerPromocional.jpg"
+            class="slider-img w-full h-[80vh] max-h-[100vh] object-cover object-center hidden transition-all duration-700"
+            alt="Banner Promocional">
     </div>
     <!-- Flechas -->
-    <button id="prev-banner" class="absolute left-8 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-4 shadow-lg z-30 border border-gray-300 text-3xl">
+    <button id="prev-banner"
+        class="absolute left-8 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-4 shadow-lg z-30 border border-gray-300 text-3xl">
         &#8592;
     </button>
-    <button id="next-banner" class="absolute right-8 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-4 shadow-lg z-30 border border-gray-300 text-3xl">
+    <button id="next-banner"
+        class="absolute right-8 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-4 shadow-lg z-30 border border-gray-300 text-3xl">
         &#8594;
     </button>
     <!-- Indicadores -->
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-4 z-30">
-        <span class="dot w-5 h-5 bg-white/90 rounded-full cursor-pointer border-2 border-gray-400 transition-all"></span>
-        <span class="dot w-5 h-5 bg-white/90 rounded-full cursor-pointer border-2 border-gray-400 transition-all"></span>
-        <span class="dot w-5 h-5 bg-white/90 rounded-full cursor-pointer border-2 border-gray-400 transition-all"></span>
-        <span class="dot w-5 h-5 bg-white/90 rounded-full cursor-pointer border-2 border-gray-400 transition-all"></span>
+        <span
+            class="dot w-5 h-5 bg-white/90 rounded-full cursor-pointer border-2 border-gray-400 transition-all"></span>
+        <span
+            class="dot w-5 h-5 bg-white/90 rounded-full cursor-pointer border-2 border-gray-400 transition-all"></span>
+        <span
+            class="dot w-5 h-5 bg-white/90 rounded-full cursor-pointer border-2 border-gray-400 transition-all"></span>
+        <span
+            class="dot w-5 h-5 bg-white/90 rounded-full cursor-pointer border-2 border-gray-400 transition-all"></span>
     </div>
 </div>
 
@@ -50,19 +71,25 @@ if (isset(
     <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">NUESTRAS CATEGORÍAS DESTACADAS</h2>
     <div class="flex flex-wrap justify-center gap-4 md:gap-8 mb-8">
         <!-- Gamer -->
-        <button class="categoria-btn group flex flex-col items-center bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 focus:outline-none" data-categoria="<?= $idGamer ?>" style="width:200px;">
+        <button
+            class="categoria-btn group flex flex-col items-center bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 focus:outline-none"
+            data-categoria="<?= $idGamer ?>" style="width:200px;">
             <img src="/Perunet/public/img/EMPRESA/Categoria2.jpg" alt="Gamer"
                 class="w-full h-[180px] max-h-[200px] object-cover rounded-t-lg transition-transform duration-200 group-hover:scale-105 group-focus:scale-105 md:h-[140px] md:max-h-[160px] sm:h-[100px] sm:max-h-[120px]" />
             <span class="py-3 text-lg font-semibold group-hover:text-red-600">GAMER</span>
         </button>
         <!-- Videovigilancia -->
-        <button class="categoria-btn group flex flex-col items-center bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 focus:outline-none" data-categoria="<?= $idVideo ?>" style="width:200px;">
+        <button
+            class="categoria-btn group flex flex-col items-center bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 focus:outline-none"
+            data-categoria="<?= $idVideo ?>" style="width:200px;">
             <img src="/Perunet/public/img/EMPRESA/Categoria1.jpg" alt="Videovigilancia"
                 class="w-full h-[180px] max-h-[200px] object-cover rounded-t-lg transition-transform duration-200 group-hover:scale-105 group-focus:scale-105 md:h-[140px] md:max-h-[160px] sm:h-[100px] sm:max-h-[120px]" />
             <span class="py-3 text-lg font-semibold group-hover:text-red-600">VIDEOVIGILANCIA</span>
         </button>
         <!-- Cableado Estructurado -->
-        <button class="categoria-btn group flex flex-col items-center bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 focus:outline-none" data-categoria="<?= $idCableado ?>" style="width:200px;">
+        <button
+            class="categoria-btn group flex flex-col items-center bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 focus:outline-none"
+            data-categoria="<?= $idCableado ?>" style="width:200px;">
             <img src="/Perunet/public/img/EMPRESA/Categoria3.jpg" alt="Cableado Estructurado"
                 class="w-full h-[180px] max-h-[200px] object-cover rounded-t-lg transition-transform duration-200 group-hover:scale-105 group-focus:scale-105 md:h-[140px] md:max-h-[160px] sm:h-[100px] sm:max-h-[120px]" />
             <span class="py-3 text-lg font-semibold group-hover:text-red-600">CABLEADO ESTRUCTURADO</span>
@@ -77,12 +104,14 @@ if (isset(
     </div>
 </section>
 <!-- ================= SECCIÓN DE AYUDA Y CONTACTO ================= -->
-<div class="w-full max-w-7xl mx-auto my-8 flex flex-col md:flex-row items-center justify-between bg-white rounded-lg shadow p-6">
+<div
+    class="w-full max-w-7xl mx-auto my-8 flex flex-col md:flex-row items-center justify-between bg-white rounded-lg shadow p-6">
     <div>
         <h3 class="text-lg font-semibold mb-1">¿Necesitas ayuda?</h3>
         <p class="text-gray-600">Contáctate con un especialista</p>
     </div>
-    <a href="/perunet/contacto" class="mt-4 md:mt-0 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-full flex items-center gap-2 transition-colors">
+    <a href="/perunet/contacto"
+        class="mt-4 md:mt-0 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-full flex items-center gap-2 transition-colors">
         <span class="fa fa-life-ring"></span> CONTACTO
     </a>
 </div>
@@ -298,12 +327,12 @@ if (isset(
     // Función AJAX para cargar productos por categoría
     function getCategorias(id_categoria) {
         fetch('/perunet/public/php/index.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: 'accion=getCategorias&id_categoria=' + encodeURIComponent(id_categoria)
-            })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'accion=getCategorias&id_categoria=' + encodeURIComponent(id_categoria)
+        })
             .then(response => response.text())
             .then(data => {
                 // Actualiza la URL sin recargar la página
@@ -316,10 +345,10 @@ if (isset(
     }
 
     // ================= CATEGORÍAS DESTACADAS =================
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const categoriaBtns = document.querySelectorAll('.categoria-btn');
         categoriaBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 const id_categoria = btn.getAttribute('data-categoria');
                 getCategorias(id_categoria);
             });

@@ -74,12 +74,16 @@ function crearCarrito() {
           2000
         );
       }
-    ).fail(function (jqXHR, textStatus, errorThrown) {
-      modalAlert.show(
-        "error",
-        "Error!",
-        "Error al agregar al carrito: " + textStatus + " " + errorThrown
-      );
+    ).fail(function (jqXHR) {
+      let msg = "Error desconocido";
+      try {
+        const resp = JSON.parse(jqXHR.responseText);
+        msg = resp.message || msg;
+      } catch(e) {
+        msg = jqXHR.responseText || msg;
+      }
+      console.error("❌ Error carrito:", msg);
+      modalAlert.show("error", "Error!", "Error al agregar al carrito: " + msg);
     });
   });
 }

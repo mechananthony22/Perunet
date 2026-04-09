@@ -58,9 +58,13 @@ if (!empty($carrito)) {
             <h3 class="text-xl font-bold text-black mb-3">Métodos de Pago</h3>
             <div class="grid grid-cols-2 gap-3 mb-2">
                 <?php foreach ($metodos as $m): ?>
+                    <?php
+                        $nombrePago = $m['nombre'] ?? '';
+                        $tipoPago   = $m['tipo']   ?? $nombrePago;
+                    ?>
                     <div class="flex flex-col items-center payment-item cursor-pointer border border-gray-200 rounded-lg p-2 hover:shadow-lg transition" data-metodo="<?= $m['id_met'] ?>">
-                        <img src="/perunet/public/img/EMPRESA/PAGOS/<?= strtoupper($m['nombre']) ?>.png" alt="<?= htmlspecialchars($m['tipo']) ?>" class="h-10 mb-1">
-                        <p class="text-xs text-black font-semibold"><?= strtoupper($m['tipo']) ?></p>
+                        <img src="/perunet/public/img/EMPRESA/PAGOS/<?= htmlspecialchars(strtoupper($nombrePago)) ?>.png" alt="<?= htmlspecialchars($tipoPago) ?>" class="h-10 mb-1">
+                        <p class="text-xs text-black font-semibold"><?= htmlspecialchars(strtoupper($tipoPago)) ?></p>
                     </div>
                 <?php endforeach; ?>
             </div>

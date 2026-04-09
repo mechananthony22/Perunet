@@ -65,8 +65,8 @@ include __DIR__ . '/../../../components/adminHead.php';
                                             <?= ucfirst(htmlspecialchars($rol['estado'])) ?>
                                         </span>
                                     </td>
-                                    <td class="px-4 py-2 text-gray-700"><?= date('d/m/Y H:i', strtotime($rol['create_at'])) ?></td>
-                                    <td class="px-4 py-2 text-gray-700"><?= date('d/m/Y H:i', strtotime($rol['update_at'])) ?></td>
+                                    <td class="px-4 py-2 text-gray-700"><?= (!empty($rol['create_at'])) ? date('d/m/Y H:i', strtotime($rol['create_at'])) : '---' ?></td>
+                                    <td class="px-4 py-2 text-gray-700"><?= (!empty($rol['update_at'])) ? date('d/m/Y H:i', strtotime($rol['update_at'])) : '---' ?></td>
                                     <td class="px-4 py-2 flex gap-2">
                                         <button class="bg-yellow-100 text-yellow-800 rounded-full px-4 py-1 text-xs font-semibold hover:bg-yellow-200 transition" onclick='editarRol(`<?= htmlspecialchars(json_encode($rol)) ?>`)'>Editar</button>
                                         <button class="bg-red-100 text-red-700 rounded-full px-4 py-1 text-xs font-semibold hover:bg-red-200 transition" onclick="eliminarRol(`<?= htmlspecialchars($rol['id_rol']) ?>`)">Eliminar</button>

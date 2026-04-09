@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= isset(
                 $title
-            ) ? $title . ' - PeruNet' : 'PeruNet' ?></title>
+            ) ? $title . ' - NewTec' : 'NewTec' ?></title>
     <link rel="icon" href="/perunet/public/img/EMPRESA/p.png">
 
     <!-- jQuery (debe ir antes de cualquier script que use $) -->

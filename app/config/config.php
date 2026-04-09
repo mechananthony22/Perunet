@@ -5,12 +5,12 @@
 
 // Configuración de la base de datos
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'perunet');
+define('DB_NAME', 'tienda_online');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 
 // Configuración de la aplicación
-define('APP_NAME', 'PeruNet');
+define('APP_NAME', 'NewTec');
 define('APP_URL', 'http://localhost/perunet');
 if (!defined('APP_ROOT')) {
     define('APP_ROOT', __DIR__ . '/../');
