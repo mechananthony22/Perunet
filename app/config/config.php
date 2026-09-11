@@ -10,7 +10,7 @@ define('DB_USER', 'root');
 define('DB_PASS', '');
 
 // Configuración de la aplicación
-define('APP_NAME', 'NewTec');
+define('APP_NAME', 'Perunet');
 define('APP_URL', 'http://localhost/perunet');
 if (!defined('APP_ROOT')) {
     define('APP_ROOT', __DIR__ . '/../');

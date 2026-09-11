@@ -6,7 +6,7 @@ include_once __DIR__ . '../../models/DetalleCarrito.php';
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 md:text-xs flex items-center justify-between h-20 flex-nowrap">
         <!-- Logo -->
         <a href="/perunet/" class="flex items-center space-x-3 min-w-[60px]">
-            <img src="/perunet/public/img/EMPRESA/newtec_logo.png?v=2.0" alt="NewTec Logo" class="object-contain max-h-12 w-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]">
+            <img src="/perunet/public/img/EMPRESA/p.png?v=3.0" alt="Perunet Logo" class="object-contain max-h-12 w-auto max-w-[120px] sm:max-w-[160px] md:max-w-[200px]">
         </a>
 
         <!-- Buscador -->

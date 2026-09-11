@@ -11,8 +11,8 @@ if (session_status() === PHP_SESSION_NONE) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NewTec - Inicio de Sesión</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Perunet - Inicio de Sesión</title>
+    <script src="/perunet/public/assets/js/tailwindcss.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/perunet/public/css/auth.css">
 
@@ -22,7 +22,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <div class="max-w-md w-full mx-4">
         <!-- Logo y Título -->
         <div class="text-center mb-8">
-            <img src="/perunet/public/img/EMPRESA/newtec_logo.png?v=2.0" alt="Logo NewTec" class="w-48 mx-auto mb-4">
+            <img src="/perunet/public/img/EMPRESA/p.png?v=3.0" alt="Logo Perunet" class="w-48 mx-auto mb-4">
         </div>
 
         <!-- Tarjeta de Login -->

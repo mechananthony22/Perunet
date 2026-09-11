@@ -2,6 +2,7 @@
     <ul class="flex flex-col gap-2 py-4">
         <li class="px-6 py-2 hover:bg-blue-100 rounded-l-lg transition w-full"><a href="/perunet/admin/" class="text-gray-700 font-medium">Perfil</a></li>
         <li class="px-6 py-2 hover:bg-blue-100 rounded-l-lg transition w-full"><a href="/perunet/admin/usuarios" class="text-gray-700 font-medium">Usuarios</a></li>
+        <li class="px-6 py-2 hover:bg-blue-100 rounded-l-lg transition w-full"><a href="/perunet/admin/contacto/mensajes" class="text-gray-700 font-medium">Mensajes</a></li>
         <li class="px-6 py-2 hover:bg-blue-100 rounded-l-lg transition w-full"><a href="/perunet/admin/productos" class="text-gray-700 font-medium">Productos</a></li>
         <li class="px-6 py-2 bg-blue-50 rounded-xl transition w-full">
             <a class="text-blue-700 font-semibold" href="#">Ventas</a>

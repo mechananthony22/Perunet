@@ -30,6 +30,11 @@ $router->addRoute('GET', '/contacto', function() {
     return $controller->index();
 });
 
+$router->addRoute('POST', '/contacto', function() {
+    $controller = new ContactoController();
+    return $controller->enviar();
+});
+
 // Sedes
 $router->addRoute('GET', '/sedes', function() {
     $controller = new SedesController();
@@ -42,9 +47,20 @@ $router->addRoute('GET', '/carrito', function() {
     return $controller->index();
 });
 
+$router->addRoute('GET', '/carrito/cupon', function() {
+    $controller = new CarritoController();
+    return $controller->aplicarCupon();
+});
+
 // ===========================
 // 📦 RUTAS DE PRODUCTOS (PÚBLICO)
 // ===========================
+
+// Búsqueda de productos con orden (SQLi)
+$router->addRoute('GET', '/productos', function() {
+    $controller = new ProductosController();
+    return $controller->indexBuscar();
+});
 
 // Lista de productos por categoría
 $router->addRoute('GET', '/productos/:categoria', function($categoria) {
@@ -113,6 +129,12 @@ $router->addRoute('POST', '/registro', function() {
 $router->addRoute('GET', '/logout', function() {
     $controller = new AuthController();
     return $controller->logout();
+});
+
+$router->addRoute('GET', '/usuario/api/:id', function($id) {
+    require_once __DIR__ . '/app/controllers/UsuarioController.php';
+    $controller = new UsuarioController();
+    return $controller->apiUsuario($id);
 });
 
 $router->addRoute('GET', '/usuario/perfil', function() {
@@ -331,6 +353,12 @@ $router->addRoute('GET', '/admin/ventas', function() {
 });
 
 // Detalle de venta
+$router->addRoute('GET', '/admin/contacto/mensajes', function() {
+    AuthMiddleware::checkAdmin();
+    $controller = new ContactoController();
+    return $controller->adminMensajes();
+});
+
 $router->addRoute('GET', '/admin/ventas/detalle/:id', function($id) {
     AuthMiddleware::checkAdmin(); // <-- Proteger esta ruta de admin
     $controller = new Admin\VentasController();
@@ -361,6 +389,22 @@ $router->addRoute('GET', '/admin/ventas/resumen', function() {
 // ===========================
 // 🚀 EJECUTAR LA APLICACIÓN
 // ===========================
+
+// ===========================
+// 🔧 SERVIDOR DE ARCHIVOS ESTÁTICOS (uploads)
+// ===========================
+$uri = $_SERVER['REQUEST_URI'];
+$base = '/perunet/public/img/uploads/';
+if (strpos($uri, $base) === 0) {
+    $file = __DIR__ . str_replace('/', DIRECTORY_SEPARATOR, $uri);
+    if (file_exists($file) && is_file($file)) {
+        $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+        $mimeTypes = ['png' => 'image/png', 'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'gif' => 'image/gif', 'php' => 'text/plain'];
+        header('Content-Type: ' . ($mimeTypes[$ext] ?? 'application/octet-stream'));
+        readfile($file);
+        exit;
+    }
+}
 
 try {
     // Ejecutar el router

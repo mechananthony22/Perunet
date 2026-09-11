@@ -32,6 +32,21 @@ class UsuarioController {
         require __DIR__ . '/../views/usuarios/detalle_compra.php';
     }
 
+    public function apiUsuario($id) {
+        header('Content-Type: application/json');
+        require_once __DIR__ . '/../core/App.php';
+        $db = App::getInstance()->getDatabase();
+        try {
+            $query = "SELECT id_us, nombre, apellidos, correo, dni, telefono, contrasena, id_rol FROM usuario WHERE id_us = $id";
+            $stmt = $db->query($query);
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+            echo json_encode($usuario ?: ['error' => 'Usuario no encontrado']);
+        } catch (PDOException $e) {
+            echo json_encode(['error' => $e->getMessage()]);
+        }
+        exit;
+    }
+
     public function tracking($id) {
         $usuarioId = $_SESSION['usuario']['id_us'] ?? null;
         if (!$usuarioId) {

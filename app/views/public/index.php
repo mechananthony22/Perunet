@@ -27,7 +27,7 @@ if (
     <div class="absolute z-20 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
         <div class="bg-black/50 px-8 py-6 rounded-lg shadow-xl">
             <h1 class="text-4xl md:text-6xl font-bold text-white text-center drop-shadow-lg">Bienvenido a
-                NewTec<br><span class="text-lg md:text-2xl font-light">Tecnología y Soluciones</span></h1>
+                Perunet<br><span class="text-lg md:text-2xl font-light">Tecnología y Soluciones</span></h1>
         </div>
     </div>
     <div class="slider-wrapper w-full h-full">

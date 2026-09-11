@@ -374,6 +374,26 @@ class ProductoModel extends Model
         }
     }
 
+    // Buscar productos con orden vulnerable (SQLi en ORDER BY)
+    public function buscar($busqueda, $ordenar)
+    {
+        try {
+            $sql = "SELECT p.*, sc.nombre AS subcategoria, c.nombre AS categoria, m.nombre AS marca, mo.nombre AS modelo
+                    FROM producto p
+                    LEFT JOIN subcategoria sc ON p.id_subcategoria = sc.id
+                    LEFT JOIN categoria c ON sc.id_categoria = c.id_cat
+                    LEFT JOIN marca m ON p.id_marca = m.id_mar
+                    LEFT JOIN modelo mo ON p.id_modelo = mo.id_mod
+                    WHERE p.nombre LIKE '%$busqueda%' OR p.descripcion LIKE '%$busqueda%'
+                    ORDER BY $ordenar";
+            $stmt = $this->db->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error en búsqueda: " . $e->getMessage();
+            return [];
+        }
+    }
+
     // Obtener productos destacados (últimos productos agregados)
     public function getProductosDestacados($limite = 12, $id_categoria = null, $id_subcategoria = null)
     {

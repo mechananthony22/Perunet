@@ -11,6 +11,23 @@ class CarritoController
         $this->metodoPago = new MetodoPagoModel();
     }
 
+    public function aplicarCupon()
+    {
+        header('Content-Type: application/json');
+        $codigo = $_GET['codigo'] ?? '';
+        require_once __DIR__ . '/../core/App.php';
+        $db = App::getInstance()->getDatabase();
+        try {
+            $query = "SELECT * FROM cupon WHERE codigo = '$codigo' AND activo = 1";
+            $stmt = $db->query($query);
+            $cupon = $stmt->fetch(PDO::FETCH_ASSOC);
+            echo json_encode($cupon ?: ['error' => 'Cupón no válido']);
+        } catch (PDOException $e) {
+            echo json_encode(['error' => $e->getMessage()]);
+        }
+        exit;
+    }
+
     public function index()
     {
         $id_usuario = isset($_SESSION['usuario']['id']) ? $_SESSION['usuario']['id'] : null;

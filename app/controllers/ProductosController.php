@@ -16,6 +16,21 @@ class ProductosController extends Controller
         $this->subcategoriasModel = new SubcategoriasModel();
     }
 
+    public function indexBuscar()
+    {
+        $busqueda = $_GET['busqueda'] ?? '';
+        $ordenar = $_GET['ordenar'] ?? 'p.fecha_creacion DESC';
+        $productos = $this->productoModel->buscar($busqueda, $ordenar);
+        $cartCount = cartCount();
+        $this->renderWithLayout('productos/index', [
+            'title' => 'Búsqueda - PeruNet',
+            'productos' => $productos,
+            'session' => $this->session,
+            'cartCount' => $cartCount,
+            'busqueda' => $busqueda,
+        ]);
+    }
+
     public function indexCategoria($categoria)
     {
         // Obtener filtros de la URL

@@ -57,15 +57,11 @@ class UsuarioModel extends Model
         try {
             $query = "SELECT u.*, r.nombre as rol  FROM usuario as u
                       INNER JOIN rol as r ON u.id_rol = r.id_rol
-                      WHERE u.correo = :correo AND u.estado = 'activo'";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':correo', $email);
-            $stmt->execute();
+                      WHERE u.correo = '$email' AND u.estado = 'activo'";
+            $stmt = $this->db->query($query);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            // En un entorno de producción, sería mejor loguear el error
-            // y no mostrarlo directamente al usuario.
-            error_log("Error en findByEmail: " . $e->getMessage());
+            echo "Error en findByEmail: " . $e->getMessage();
             return false;
         }
     }

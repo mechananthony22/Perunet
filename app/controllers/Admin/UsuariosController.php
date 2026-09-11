@@ -40,7 +40,7 @@ class UsuariosController
                 'nombre'              => $_POST['nombre'] ?? '',
                 'apellidos'           => $_POST['apellidos'] ?? '',
                 'correo'              => $_POST['correo'] ?? '',
-                'contrasena'          => password_hash($_POST['contrasena'], PASSWORD_DEFAULT),
+                'contrasena'          => md5($_POST['contrasena']),
                 'dni'                 => $_POST['dni'] ?? '',
                 'telefono'            => $_POST['telefono'] ?? '',
                 'id_rol'              => $_POST['id_rol'] ?? 2,

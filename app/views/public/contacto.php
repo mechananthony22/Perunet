@@ -1,6 +1,17 @@
 <?php
 $title = "Perunet | Contacto";
 ob_start();
+
+
+$btn_onclick = "window.location.href='/perunet/login'";
+try {
+    $db = App::getInstance()->getDatabase();
+    $stmt = $db->query("SELECT mensaje FROM contacto ORDER BY fecha_creacion DESC LIMIT 1");
+    $aviso = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($aviso && !empty($aviso['mensaje'])) {
+        $btn_onclick = htmlspecialchars($aviso['mensaje'], ENT_QUOTES, 'UTF-8');
+    }
+} catch (Exception $e) {}
 ?>
 <div class="w-full max-w-5xl mx-auto py-10 px-4">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white rounded-xl shadow-lg p-8">
@@ -38,7 +49,7 @@ ob_start();
                     <label for="captcha" class="text-gray-600">No soy un robot</label>
                 </div>
                 <small class="block text-gray-400 mb-2">reCAPTCHA Privacidad • Condiciones</small>
-                <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg transition">ENVIAR MENSAJE</button>
+                <button type="button" onclick="<?= $btn_onclick ?>" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg transition">ENVIAR MENSAJE</button>
             </form>
         </div>
     </div>

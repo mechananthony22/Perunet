@@ -116,7 +116,7 @@ CREATE TABLE venta (
   id_direccion INT,
   total DECIMAL(10,2) NOT NULL,
   metodo_pago_id INT,
-  tipo_entrega ENUM('recojo en tienda', 'domicilio') NOT NULL,
+  tipo_entrega ENUM('recojo en tienda', 'domicilio', 'tienda') NOT NULL,
   id_sucursal INT NULL,
   estado ENUM('pendiente', 'enviado', 'entregado', 'cancelado') DEFAULT 'pendiente',
   fecha_venta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -183,6 +183,16 @@ CREATE TABLE detalle_carrito (
   FOREIGN KEY (id_carrito) REFERENCES carrito(id_carrito) ON DELETE CASCADE,
   FOREIGN KEY (id_producto) REFERENCES producto(id_pro),
   UNIQUE KEY uk_carrito_producto (id_carrito, id_producto)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 20. CONTACTO
+CREATE TABLE contacto (
+  id_contacto INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  telefono VARCHAR(15),
+  correo VARCHAR(100) NOT NULL,
+  mensaje TEXT NOT NULL,
+  fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -300,44 +310,44 @@ INSERT INTO modelo (id_mod, nombre, id_marca) VALUES (10, 'HAC-HDW1200EM', 2);
 -- Productos de VIDEOVIGILANCIA
 INSERT INTO producto (nombre, descripcion, precio, stock, imagen, id_subcategoria, id_marca, id_modelo)
 VALUES 
-('Cámara IP Hikvision DS-2CD2043G0', 'Cámara de videovigilancia 4MP para exteriores con visión nocturna', 320.00, 25, 'VIDEOVIGILANCIA/CAMARAS/Cámara Anti-vandalismo.png', 1, 1, 1),
-('Cámara IP Dahua IPC-HFW1230S', 'Cámara de vigilancia WiFi 1080P con audio integrado', 280.00, 30, 'VIDEOVIGILANCIA/CAMARAS/Cámara c.png', 1, 2, 6),
-('NVR Hikvision DS-7608NI-K2', 'Grabador de video en red 8 canales 4K', 450.00, 15, 'VIDEOVIGILANCIA/NVR/NVR 16 Canales.png', 2, 1, 2),
-('Monitor de Seguridad 19"', 'Monitor profesional para videovigilancia', 180.00, 20, 'VIDEOVIGILANCIA/MONITORES/Monitor 1.png', 4, 1, 1),
-('Cable Ethernet Cat6 100m', 'Cable de red para instalaciones de videovigilancia', 85.00, 50, 'VIDEOVIGILANCIA/ACCESORIOS DE VIGILANCIA/Cable Ethernet Cat6.png', 3, 3, 1);
+('Cámara IP Hikvision DS-2CD2043G0', 'Cámara de videovigilancia 4MP para exteriores con visión nocturna', 20.00, 25, 'VIDEOVIGILANCIA/CAMARAS/Cámara Anti-vandalismo.png', 1, 1, 1),
+('Cámara IP Dahua IPC-HFW1230S', 'Cámara de vigilancia WiFi 1080P con audio integrado', 20.00, 30, 'VIDEOVIGILANCIA/CAMARAS/Cámara c.png', 1, 2, 6),
+('NVR Hikvision DS-7608NI-K2', 'Grabador de video en red 8 canales 4K', 20.00, 15, 'VIDEOVIGILANCIA/NVR/NVR 16 Canales.png', 2, 1, 2),
+('Monitor de Seguridad 19"', 'Monitor profesional para videovigilancia', 20.00, 20, 'VIDEOVIGILANCIA/MONITORES/Monitor 1.png', 4, 1, 1),
+('Cable Ethernet Cat6 100m', 'Cable de red para instalaciones de videovigilancia', 20.00, 50, 'VIDEOVIGILANCIA/ACCESORIOS DE VIGILANCIA/Cable Ethernet Cat6.png', 3, 3, 1);
 
 -- Productos de GAMER
 INSERT INTO producto (nombre, descripcion, precio, stock, imagen, id_subcategoria, id_marca, id_modelo)
 VALUES 
-('Teclado Gamer Logitech G Pro', 'Teclado mecánico RGB para gaming profesional', 120.00, 40, 'GAMER/TECLADOS/Teclado1.png', 6, 10, 1),
-('Mouse Gamer Logitech G502 Hero', 'Mouse gaming con sensor HERO 25K', 95.00, 35, 'GAMER/mouse/Logitech G502 Hero.png', 7, 10, 2),
-('Audífonos Gamer Corsair HS60', 'Audífonos gaming con micrófono desmontable', 75.00, 30, 'GAMER/AUDIFONOS/Audifonos1.png', 9, 10, 1),
-('Parlantes Gamer 2.1', 'Sistema de audio gaming con subwoofer', 65.00, 25, 'GAMER/PARLANTES/Parlante1.png', 8, 10, 1),
-('Pad Mouse Gamer RGB', 'Alfombrilla gaming con iluminación RGB', 25.00, 60, 'GAMER/PADMOUSE/PadMouse1.png', 10, 10, 1);
+('Teclado Gamer Logitech G Pro', 'Teclado mecánico RGB para gaming profesional', 20.00, 40, 'GAMER/TECLADOS/Teclado1.png', 6, 10, 1),
+('Mouse Gamer Logitech G502 Hero', 'Mouse gaming con sensor HERO 25K', 20.00, 35, 'GAMER/mouse/Logitech G502 Hero.png', 7, 10, 2),
+('Audífonos Gamer Corsair HS60', 'Audífonos gaming con micrófono desmontable', 20.00, 30, 'GAMER/AUDIFONOS/Audifonos1.png', 9, 10, 1),
+('Parlantes Gamer 2.1', 'Sistema de audio gaming con subwoofer', 20.00, 25, 'GAMER/PARLANTES/Parlante1.png', 8, 10, 1),
+('Pad Mouse Gamer RGB', 'Alfombrilla gaming con iluminación RGB', 20.00, 60, 'GAMER/PADMOUSE/PadMouse1.png', 10, 10, 1);
 
 -- Productos de ALMACENAMIENTO
 INSERT INTO producto (nombre, descripcion, precio, stock, imagen, id_subcategoria, id_marca, id_modelo)
 VALUES 
-('SSD Kingston A2000 500GB', 'Disco sólido interno NVMe de alta velocidad', 85.00, 45, 'ALMACENAMIENTO/Memorias SD/Kingston A2000.png', 1, 6, 1),
-('HDD Seagate Barracuda 1TB', 'Disco duro interno 7200 RPM', 45.00, 80, 'ALMACENAMIENTO/Discos HDD/Seagate Barracuda.png', 2, 7, 1),
-('USB Kingston DataTraveler 32GB', 'Memoria USB de alta velocidad', 15.00, 100, 'ALMACENAMIENTO/Memorias USB/Kingston DataTraveler G4.png', 3, 6, 1),
+('SSD Kingston A2000 500GB', 'Disco sólido interno NVMe de alta velocidad', 20.00, 45, 'ALMACENAMIENTO/Memorias SD/Kingston A2000.png', 1, 6, 1),
+('HDD Seagate Barracuda 1TB', 'Disco duro interno 7200 RPM', 20.00, 80, 'ALMACENAMIENTO/Discos HDD/Seagate Barracuda.png', 2, 7, 1),
+('USB Kingston DataTraveler 32GB', 'Memoria USB de alta velocidad', 20.00, 100, 'ALMACENAMIENTO/Memorias USB/Kingston DataTraveler G4.png', 3, 6, 1),
 ('SD Card Kingston Canvas 64GB', 'Tarjeta de memoria para cámaras', 20.00, 75, 'ALMACENAMIENTO/Discos SSD/Kingston Canvas React.png', 4, 6, 1);
 
 -- Productos de CABLEADO Y ESTRUCTURADO
 INSERT INTO producto (nombre, descripcion, precio, stock, imagen, id_subcategoria, id_marca, id_modelo)
 VALUES 
-('Cable UTP Cat6 305m', 'Cable de red categoría 6 para instalaciones', 120.00, 30, 'CABLADO/UTP/Cable UTP Cat6.png', 1, 3, 1),
-('Patch Panel 24 Puertos', 'Panel de conexión para cableado estructurado', 45.00, 25, 'CABLADO/PATCH/Patch Panel 24 Puertos.png', 2, 3, 1),
-('Conector RJ45 Crimpado', 'Conectores RJ45 para terminación de cables', 2.50, 200, 'CABLADO/RJ45/Conector RJ45 Crimpado.png', 3, 3, 1),
-('Canaleta PVC 2x2', 'Canaleta para organizar cables', 8.00, 150, 'CABLADO/CANALETAS/Canaleta de PVC.png', 4, 3, 1);
+('Cable UTP Cat6 305m', 'Cable de red categoría 6 para instalaciones', 20.00, 30, 'CABLADO/UTP/Cable UTP Cat6.png', 1, 3, 1),
+('Patch Panel 24 Puertos', 'Panel de conexión para cableado estructurado', 20.00, 25, 'CABLADO/PATCH/Patch Panel 24 Puertos.png', 2, 3, 1),
+('Conector RJ45 Crimpado', 'Conectores RJ45 para terminación de cables', 20.00, 200, 'CABLADO/RJ45/Conector RJ45 Crimpado.png', 3, 3, 1),
+('Canaleta PVC 2x2', 'Canaleta para organizar cables', 20.00, 150, 'CABLADO/CANALETAS/Canaleta de PVC.png', 4, 3, 1);
 
 -- Productos de CONTROL DE ACCESO
 INSERT INTO producto (nombre, descripcion, precio, stock, imagen, id_subcategoria, id_marca, id_modelo)
 VALUES 
-('Lector Biométrico Facial', 'Control de acceso con reconocimiento facial', 350.00, 15, 'CONTROL DE ACCESO/LECTOR/BIOMETRICO FACIAL DE ASISTENCIA UFACE800 PLUS.png', 1, 1, 3),
-('Cerradura Electrónica WiFi', 'Cerradura inteligente con control remoto', 280.00, 20, 'CONTROL DE ACCESO/CERRADURAS/Cerradura de Seguridad Inalámbrica.png', 2, 1, 1),
-('Tag de Proximidad 125kHz', 'Tarjetas de acceso por proximidad', 3.50, 500, 'CONTROL DE ACCESO/TAGS/Tag de Proximidad 125 kHz.png', 3, 1, 1),
-('Controlador de Acceso 2 Puertas', 'Módulo de control para 2 puertas', 180.00, 25, 'CONTROL DE ACCESO/MODULO/Controlador de Acceso 2 Puertas.png', 4, 1, 1); 
+('Lector Biométrico Facial', 'Control de acceso con reconocimiento facial', 20.00, 15, 'CONTROL DE ACCESO/LECTOR/BIOMETRICO FACIAL DE ASISTENCIA UFACE800 PLUS.png', 1, 1, 3),
+('Cerradura Electrónica WiFi', 'Cerradura inteligente con control remoto', 20.00, 20, 'CONTROL DE ACCESO/CERRADURAS/Cerradura de Seguridad Inalámbrica.png', 2, 1, 1),
+('Tag de Proximidad 125kHz', 'Tarjetas de acceso por proximidad', 20.00, 500, 'CONTROL DE ACCESO/TAGS/Tag de Proximidad 125 kHz.png', 3, 1, 1),
+('Controlador de Acceso 2 Puertas', 'Módulo de control para 2 puertas', 20.00, 25, 'CONTROL DE ACCESO/MODULO/Controlador de Acceso 2 Puertas.png', 4, 1, 1); 
 
 -- METODOS DE PAGO
 INSERT INTO metodo_pago (id_met, nombre, tipo) VALUES (1, 'TARJETA', 'tarjeta');
@@ -352,3 +362,8 @@ INSERT INTO sucursal (nombre, direccion, ciudad, departamento) VALUES
 ('Sede 1', 'Av. Lima 123', 'Lima', 'Lima'),
 ('Sede 2', 'Jr. Cusco 456', 'Lima', 'Lima'),
 ('Sede 3', 'Calle Piura 789', 'Lima', 'Lima');
+
+-- CONTACTOS
+INSERT INTO contacto (nombre, telefono, correo, mensaje) VALUES
+('Juan Perez', '987654321', 'juan@gmail.com', 'Hola, quisiera información sobre cámaras IP.'),
+('Maria Lopez', '912345678', 'maria@gmail.com', 'Tienen stock del teclado logitech?');
